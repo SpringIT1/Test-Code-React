@@ -11,14 +11,35 @@ class MyComponent extends React.Component {
     };
 
     handleClick(event) {
-        console.log(">> click me my button")
-        console.log("My name is", this.state.name)
+        console.log(">> click me my button");
+
+        //merge State => react class
+
+        this.setState({
+            name: 'Min Min',
+            age: Math.floor((Math.random() * 100) + 1)
+        })
+
+        // this.setState({
+
+        // })
 
     }
 
     handleOnMouseOver(event) {
-        console.log(event.pageX)
+        // console.log(event.pageX)
 
+    }
+    handleOnChangeInput = (event) => {
+        this.setState({
+            name: event.target.value
+        })
+
+
+    }
+    handleOnSubmit = (event) => {
+        event.preventDefault();
+        console.log(this.state)
     }
     //JSX
     render() {
@@ -26,9 +47,15 @@ class MyComponent extends React.Component {
 
             <div>
 
-                My name is {this.state.name}  I'm from {this.state.address}
-                <button onMouseOver={this.handleOnMouseOver}>Meow me</button>
-                <button onClick={this.handleClick}>Click me</button>
+                My name is {this.state.name}  I'm {this.state.age}
+                <form onSubmit={(event) => this.handleOnSubmit(event)}>
+                    <input
+                        value={this.state.name}
+                        type="text"
+                        onChange={(event) => this.handleOnChangeInput(event)}
+                    />
+                    <button>Submit</button>
+                </form>
 
             </div>
 
